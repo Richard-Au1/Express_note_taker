@@ -11,22 +11,22 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
-app.use(express.static("/public/assets/js/index.js"));
+app.use(express.static("public/index.html"));
 // sends back index.htmls
 app.get("/", (req, res) =>
-  res.sendFile(path.join(__dirname, "public/assets/index.html"))
+  res.sendFile(path.join(__dirname, "public/index.html"))
 );
 // sends back notes.html
 app.get("/notes", (req, res) =>
-  res.sendFile(path.join(__dirname, "public/assets/notes.html"))
+  res.sendFile(path.join(__dirname, "public/notes.html"))
 );
-app.get('/css/styles.css', (req, res) => {
-    res.sendFile(path.join(__dirname, "public/assets/css/styles.css"), {
-      headers: {
-        'Content-Type': 'text/css',
-      },
-    });
-  });
+// app.get('/css/styles.css', (req, res) => {
+//     res.sendFile(path.join(__dirname, "public/assets/css/styles.css"), {
+//       headers: {
+//         'Content-Type': 'text/css',
+//       },
+//     });
+//   });
 // reads the db.json file and changes it to json data.
 app.get("/api/notes", function (req, res) {
     fs.readFile("db/db.json", "utf8", (err, data) => {
