@@ -73,6 +73,6 @@ body {
 .list-container .list-group-item {
   border-left: none;
   border-right: none;
-  padding: 15px;
+  padding: 20px;
   cursor: pointer;
 }

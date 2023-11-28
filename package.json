@@ -13,11 +13,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+"
+    "url": "git+https://github.com/Richard-Au1/Express_note_taker"
   },
   "keywords": [],
   "bugs": {
-    "url": " "
-  },
-  "homepage": " "
+    "url": "https://github.com/Richard-Au1/Express_note_taker/issues"
+  }
 }
