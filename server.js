@@ -1,13 +1,16 @@
 // dependencies required to run app
 const express = require("express");
 const fs = require("fs");
+const path = require("path");
+const uniqid = require("uniqid")
 
-var app =  express();
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 3001;
+const app = express();
 
-app.use(express.urlencoded({extended: true}))
 app.use(express.json());
-app.use("/public/assets", express.static(__dirname + "/public/assets"));
+app.use(express.urlencoded({extended: true}))
+
+app.use(express.static("/public"));
 
 
 require("./routes/html-routes")(app);
