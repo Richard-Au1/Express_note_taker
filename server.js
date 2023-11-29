@@ -27,6 +27,7 @@ app.get("/notes", (req, res) =>
 //       },
 //     });
 //   });
+
 // reads the db.json file and changes it to json data.
 app.get("/api/notes", function (req, res) {
     fs.readFile("db/db.json", "utf8", (err, data) => {
@@ -53,6 +54,21 @@ app.get("/api/notes", function (req, res) {
     err ? console.error(err) : console.info(`\nData written to ${destination}`)
   );
 
+  app.delete("/api/notes/:id", (req, res) => {
+    let id = req.params.id;
+    let parsedData;
+    fs.readFile("db/db.json", "utf8", (err, data) => {
+      if (err) {
+        console.error(err);
+      } else {
+        parsedData = JSON.parse(data);
+        const filterData = parsedData.filter((note) => note.id !== id);
+        writeNewNoteToJson("db/db.json", filterData);
+      }
+    });
+    res.send(`Deleted note with ${req.params.id}`);
+  });  
+  
   app.post("/api/notes", (req, res) => {
     const { title, text } = req.body;
     if (title && text) {
@@ -74,20 +90,7 @@ app.get("/api/notes", function (req, res) {
     }
   });
 
-  app.delete("/api/notes/:id", (req, res) => {
-    let id = req.params.id;
-    let parsedData;
-    fs.readFile("db/db.json", "utf8", (err, data) => {
-      if (err) {
-        console.error(err);
-      } else {
-        parsedData = JSON.parse(data);
-        const filterData = parsedData.filter((note) => note.id !== id);
-        writeNewNoteToJson("db/db.json", filterData);
-      }
-    });
-    res.send(`Deleted note with ${req.params.id}`);
-  });
+
 
 // Starts the server to begin listening
 app.listen(PORT, function() {
